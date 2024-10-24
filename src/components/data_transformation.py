@@ -63,6 +63,7 @@ class DataTransformation:
             )
 
             return preprocessor
+        
         except Exception as e:
             raise CustomException(e, sys)
         
@@ -72,6 +73,8 @@ class DataTransformation:
             train_df = pd.read_csv(train_path)
 
             test_df = pd.read_csv(test_path)
+
+            
 
             logging.info("Successfully Retrived Train and Test Data")
 
@@ -95,11 +98,14 @@ class DataTransformation:
             input_feature_train_arr=preprocessing_obj.fit_transform(input_feature_train_df)
             input_feature_test_arr=preprocessing_obj.transform(input_feature_test_df)
 
+            
+
             train_arr = np.c_[
                 input_feature_train_arr, np.array(target_feature_train_df)
             ]
             test_arr = np.c_[input_feature_test_arr, np.array(target_feature_test_df)]
 
+           
             logging.info(f"Saved preprocessing object.")
 
             save_object(
